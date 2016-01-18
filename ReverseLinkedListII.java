@@ -8,21 +8,29 @@
  */
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        int i = 1;
-        ListNode curr = head, pre = null;
-        while (i < m) {
-            pre = node;
-            node = node.next;
-            start ++;
+        if (head == null || m == n) {
+            return head;
         }
-
-        while (i < n && curr != null) {
-            ListNode next = curr.next;
-            curr.next = pre;
-            pre = curr;
-            curr = next;
-            i ++;
+        if (m == 1) {
+            ListNode pre = null;
+            ListNode curr = head;
+            for (int i = 0; i < n; ++ i) {
+                ListNodex next = curr.next;
+                curr.next = pre;
+                pre = curr;
+                curr = next;
+            }
+            if (curr != null) {
+                head.next = curr;
+            }
+            return pre;
+        } else {
+            ListNode node = head;
+            for (int i = 1; i < m - 1; ++ i) {
+                node = node.next;
+            }
+            node.next = reverseBetween(node.next, 1, n - m + 1);
+            return head;
         }
-        return head;
     }
 }
