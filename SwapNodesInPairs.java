@@ -8,13 +8,12 @@
  */
 public class Solution {
     public ListNode swapPairs(ListNode head) {
-        TreeNode pre = null;
-        TreeNode node = head;
-        while(node != null) {
-            TreeNode temp = node.next;
-            node.next = pre;
-            pre = node;
-            node = temp;
+        if (head == null || head.next == null) {
+            return head;
         }
+        ListNode temp = head.next;
+        head.next = swapPairs(temp.next);
+        temp.next = head;
+        return temp;
     }
 }
