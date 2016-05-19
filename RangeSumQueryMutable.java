@@ -1,37 +1,40 @@
 public class NumArray {
 
+    // BIT implementation
+
     int[] nums;
     int[] sum;
 
     public NumArray(int[] nums) {
         if (nums == null || nums.length == 0) return;
-        this.nums = nums;
-        this.sum = new int[nums.length];
-        initialize(1, 0, min.length - 1);
-    }
-
-    void initialize(int node, int b, int e) {
-        if (b == e)
-            sum[node] = b;
-        else {
-            //compute the values in the left and right subtrees
-            initialize(2 * node, b, (b + e) / 2);
-            initialize(2 * node + 1, (b + e) / 2 + 1);
-            //search for the minimum value in the first and
-            //second half of the interval
-            if (nums[min[2 * node]] <= nums[min[2 * node + 1]])
-                min[node] = min[2 * node];
-            else
-                min[node] = min[2 * node + 1];
+        this.nums = new int[nums.length];
+        this.sum = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; ++ i) {
+            update(i + 1, nums[i]);
         }
     }
 
+    int sum(int i) {
+        int result = 0;
+        while (i > 0) {
+            result += sum[i];
+            i -= (i & -i);
+        }
+        return result;
+    }
+
     void update(int i, int val) {
-        
+        int diff = val - this.nums[i - 1];
+        if (diff == 0) return;
+        this.nums[i - 1] = val;
+        while (i < sum.length) {
+            sum[i] += diff;
+            i += (i & -i);
+        }
     }
 
     public int sumRange(int i, int j) {
-        
+        return sum(j + 1) - sum(i);
     }
 }
 
