@@ -17,12 +17,12 @@ public class Solution {
                     result.add(Arrays.asList(nums[i], nums[start], nums[end]));
                     start ++;
                     end --;
-                    while (start > 0 && start < end && nums[start] == nums[start - 1]) {
-                        start ++;
-                    }
-                    while (end < nums.length - 1 && start < end && nums[end] == nums[end + 1]) {
-                        end --;
-                    }
+                while (start > 0 && start < end && nums[start] == nums[start - 1]) {
+                    start ++;
+                }
+                while (end < nums.length - 1 && start < end && nums[end] == nums[end + 1]) {
+                    end --;
+                }
                 } else if (nums[start] + nums[end] < target) {
                     start ++;
                 } else {

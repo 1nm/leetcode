@@ -15,7 +15,7 @@ public class Solution {
             ListNode pre = null;
             ListNode curr = head;
             for (int i = 0; i < n; ++ i) {
-                ListNodex next = curr.next;
+                ListNode next = curr.next;
                 curr.next = pre;
                 pre = curr;
                 curr = next;

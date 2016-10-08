@@ -8,46 +8,42 @@
  * }
  */
 public class Solution {
-    TreeNode root;
-    int depth = 0;
     public int countNodes(TreeNode root) {
-        this.root = root;
-        while (root != null) {
-            this.depth++;
-            root = root.left;
-        }
-        if (this.depth == 0) {
+        if (root == null) {
             return 0;
-        } else {
-            return count();
         }
-    }
-
-    private int count() {
-        int start = 0;
-        int end = (1 << (this.depth - 1)) - 1;
+        int depth = 0;
+        TreeNode node = root;
+        while (node != null) {
+            depth ++;
+            node = node.left;
+        }
+        int start =  0;
+        int end = (1 << (depth - 1)) - 1;
         while (start < end) {
-            int mid = (start + end) / 2;
-            if (find(mid)) {
-                start = mid + 1;
+            int mid = start + (end - start + 1) / 2;
+            if (find(root, depth, mid)) {
+                start = mid;
             } else {
                 end = mid - 1;
             }
         }
-        return (1 << (this.depth - 1)) + start;
+        return (1 << (depth - 1)) + start;
     }
-
-    private boolean find(int path) {
-        TreeNode node = this.root;
-        int depth = this.depth - 1;
-        while (node != null && depth > 0) {
-            if ((path & (1 << (depth - 1))) == 0) {
+    
+    // check if node n (starts from 0) exists in depth d
+    private boolean find(TreeNode root, int depth, int n) {
+        TreeNode node = root;
+        int curr = 1;
+        while (curr < depth && node != null) {
+            boolean left = ((1 << (depth - curr - 1)) & n) == 0;
+            if (left) {
                 node = node.left;
             } else {
                 node = node.right;
             }
-            depth --;
+            curr ++;
         }
-        return node != null;
+        return (node != null);
     }
 }

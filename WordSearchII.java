@@ -3,7 +3,6 @@ public class Solution {
     int[] di = {-1, 0, 1, 0};
     int[] dj = {0, 1, 0, -1};
     Set<String> result = new HashSet<>();
-
     public List<String> findWords(char[][] board, String[] words) {
         trie = new Trie();
         for (String word: words) {
@@ -97,5 +96,6 @@ public class Solution {
                 return sb.toString();
             }
         }
+
     }
 }

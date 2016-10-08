@@ -10,9 +10,10 @@ public class Solution {
                 carry = digits[i + j] / 10;
                 digits[i + j] %= 10;
             }
-        }
-        if (carry != 0) {
-            digits[digits.length - 1] = carry;
+            if (carry != 0) {
+                digits[i + num2.length()] += carry;
+                carry = 0;
+            }
         }
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < digits.length; ++ i) {

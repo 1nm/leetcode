@@ -15,6 +15,7 @@ public class Solution {
         int i = 0;
         while (i < ppath.size() && i < qpath.size() && ppath.get(i) == qpath.get(i)) {
             lca = ppath.get(i);
+            i ++;
         }
         return lca;
     }

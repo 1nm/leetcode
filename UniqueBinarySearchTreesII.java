@@ -16,11 +16,13 @@ public class Solution {
     }
 
     private List<TreeNode> generateTrees(int start, int end) {
+        List<TreeNode> result = new ArrayList<TreeNode>();
+
         if (start > end) {
-            return null;
+            result.add(null);
+            return result;
         }
 
-        List<TreeNode> result = new ArrayList<TreeNode>();
         if (start == end) {
             result.add(new TreeNode(start));
             return result;

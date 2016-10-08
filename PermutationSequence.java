@@ -1,32 +1,19 @@
-/*
-The set [1,2,3,…,n] contains a total of n! unique permutations.
-
-By listing and labeling all of the permutations in order,
-We get the following sequence (ie, for n = 3):
-
-"123"
-"132"
-"213"
-"231"
-"312"
-"321"
-Given n and k, return the kth permutation sequence.
-
-Note: Given n will be between 1 and 9 inclusive.
-*/
-
 public class Solution {
     public String getPermutation(int n, int k) {
-        
-    }
-
-    private void backtracking(StringBuffer buffer, int count, int target, int digit, int n) {
-        if (count == target) {
-            return;
+        k = k - 1;
+        int[] factorial = new int[10];
+        Arrays.fill(factorial, 1);
+        for (int i = 2; i < 10; ++ i) {
+            factorial[i] = i * factorial[i - 1];
         }
-        if (digit == n) {
-            buffer.setLength(0);
-            backtracking
+        StringBuffer nums = new StringBuffer("123456789".substring(0, n));
+        StringBuffer sb = new StringBuffer();
+        for (int i = n; i >= 1; -- i) {
+            int chozen = k / factorial[i - 1];
+            k %= factorial[i - 1];
+            sb.append(nums.charAt(chozen));
+            nums.deleteCharAt(chozen);
         }
+        return sb.toString();
     }
 }

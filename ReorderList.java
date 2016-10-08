@@ -8,6 +8,9 @@
  */
 public class Solution {
     public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
         ListNode slow = head, fast = head;
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
@@ -23,7 +26,7 @@ public class Solution {
             ListNode next1 = node1.next;
             ListNode next2 = node2.next;
             node1.next = node2;
-            node2.next = next;
+            node2.next = next1;
             node1 = next1;
             node2 = next2;
         }

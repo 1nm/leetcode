@@ -5,6 +5,7 @@ public class Solution {
             return result;
         }
         backtracking(result, new LinkedList<String>(), s, 0);
+        return result;
     }
 
     private boolean isValidIPV4(String num) {
@@ -29,7 +30,7 @@ public class Solution {
             }
             return;
         }
-        for (int i = 1; i <= 3; ++ i) {
+        for (int i = 1; i <= 3 && from + i <= s.length(); ++ i) {
             String num = s.substring(from, from + i);
             if (isValidIPV4(num)) {
                 ip.add(num);

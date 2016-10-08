@@ -1,23 +1,10 @@
-import java.util.*;
-
-public class SudokuSolver {
+public class Solution {
     List<Set<Integer>> used;
     char[][] board;
     public void solveSudoku(char[][] board) {
         this.board = board;
         init();
-        if (backtrack(0, 0)) {
-            print(this.board);
-        }
-    }
-
-    void print(char[][] board) {
-        for(int i = 0; i < 9; ++ i) {
-            for (int j = 0; j < 9; ++ j) {
-                System.out.print(board[i][j]);
-            }
-            System.out.println();
-        }
+        backtrack(0, 0);
     }
 
     void init() {
@@ -84,25 +71,4 @@ public class SudokuSolver {
         }
     }
 
-    static char[][] getBoard(String[] strs) {
-        char[][] board = new char[strs.length][];
-        for (int i = 0; i < board.length; ++ i)
-            board[i] = strs[i].toCharArray();
-        return board;
-    }
-
-    public static void main(String[] args) {
-        SudokuSolver s = new SudokuSolver();
-        char[][] board = getBoard(new String[]
-            {"53..7....",
-             "6..195...",
-             ".98....6.",
-             "8...6...3",
-             "4..8.3..1",
-             "7...2...6",
-             ".6....28.",
-             "...419..5",
-             "....8..79"});
-        s.solveSudoku(board);
-    }
 }

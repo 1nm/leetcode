@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -34,24 +38,28 @@ public class Codec {
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
         List<Integer> list = parse(data);
-        return create(list, 0);
-    }
-
-    private TreeNode create(List<Integer> list, int i) {
-        TreeNode node = new TreeNode(list.get(i));
-        int left = (i << 1) + 1;
-        int right = (i << 1) + 2;
-        // has left child
-        if (left < list.size() && list.get(left) != null) {
-            i ++;
-            node.left = create(list, i);
+        if (list.size() == 0) {
+            return null;
         }
-        // has right child
-        if (right < list.size() && list.get(right) != null) {
-            i ++;
-            node.right = create(list, i);
+        int index = 0, count = 0;
+        TreeNode root = new TreeNode(list.get(0));
+        LinkedList<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            int left = (count << 1) + 1;
+            int right = (count << 1) + 2;
+            if (left < list.size() && list.get(left) != null) {
+                node.left = new TreeNode(list.get(left));
+                q.add(node.left);
+            }
+            if (right < list.size() && list.get(right) != null) {
+                node.right = new TreeNode(list.get(right));
+                q.add(node.right);
+            }
+            count++;
         }
-        return node;
+        return root;
     }
 
     private String jsonify(List<Integer> list) {

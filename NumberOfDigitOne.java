@@ -1,4 +1,4 @@
-public class CountDigitOne {
+public class Solution {
     public int countDigitOne(int n) {
         if (n <= 0) {
             return 0;
@@ -24,9 +24,5 @@ public class CountDigitOne {
             }
         }
         return count;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new CountDigitOne().countDigitOne(10));
     }
 }

@@ -1,5 +1,5 @@
 public class Solution {
-    Map<String, PriorityQueue<String>> edges = new HashMap<>();
+    Map<String, PriorityQueue<String>> edges = new HashMap();
     List<String> itinerary = new LinkedList();
 
     public List<String> findItinerary(String[][] tickets) {

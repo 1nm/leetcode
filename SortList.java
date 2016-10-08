@@ -48,6 +48,7 @@ public class Solution {
                 curr.next = head2;
                 head2 = head2.next;
             }
+            curr = curr.next;
         }
         return dummyHead.next;
     }

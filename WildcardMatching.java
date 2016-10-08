@@ -1,27 +1,23 @@
 public class Solution {
     public boolean isMatch(String s, String p) {
-        return backtracking(s.toCharArray(), s.length() - 1, p.toCharArray(), p.length() - 1);
-    }
-
-    private boolean backtracking(char[] s, int i, char[] p, int j) {
-        if (i == -1 && j == -1)
-            return true;
-        if (i != -1 && j == -1)
-            return false;
-        if (i == -1 && j != -1) {
-            if (p[j] == '*')
-                return backtracking(s, i, p, j - 1);
-            else
+        int i = 0, j = 0;
+        int star = -1, mark = -1;
+        while (i < s.length()) {
+            if (j < p.length() && (p.charAt(j) == '?' || s.charAt(i) == p.charAt(j))) {
+                i ++;
+                j ++;
+            } else if (j < p.length() && p.charAt(j) == '*') {
+                star = j;
+                j ++;
+                mark = i;
+            } else if (star != -1) {
+                j = star + 1;
+                i = ++mark;
+            } else {
                 return false;
+            }
         }
-        if (s[i] == p[j] || p[j] == '?') {
-            return backtracking(s, i - 1, p, j - 1);
-        } else if (p[j] == '*') {
-            if (backtracking(s, i - 1, p, j))
-                return true;
-            if (backtracking(s, i, p, j - 1))
-                return true;
-        }
-        return false;
+        while (j < p.length() && p.charAt(j) == '*') j++;
+        return j == p.length();
     }
 }

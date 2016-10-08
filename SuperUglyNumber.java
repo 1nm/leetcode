@@ -14,7 +14,7 @@ public class Solution {
                 node.val = ugly[++ node.index] * node.factor;
                 q.add(node);
             }
-            while (!q.isEmpty() && node.val == ugly[i]);
+            while (!q.isEmpty() && q.peek().val == ugly[i]);
 
         }
         return ugly[n - 1];

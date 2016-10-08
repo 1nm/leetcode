@@ -15,7 +15,7 @@ public class Solution {
         int[][] buckets = new int[len][];
 
         for (int i = 0; i < nums.length; ++ i) {
-            int index = (nums[i] - min) / (buckets.length - 1);
+            int index = (nums[i] - min) / range;
             if (buckets[index] == null) {
                 buckets[index] = new int[] {nums[i], nums[i], 1};
             } else {

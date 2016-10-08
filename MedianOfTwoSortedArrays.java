@@ -16,7 +16,7 @@ public class Solution {
         }
 
         int lo = 0, hi = n, hl = (n + m + 1) / 2;
-        double median;
+        double median = 0;
 
         while (lo <= hi) {
             // p1 and p2 is pivot of nums1 and nums2 where p1 + p2 == half length

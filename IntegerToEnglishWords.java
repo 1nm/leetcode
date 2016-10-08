@@ -1,35 +1,58 @@
 public class Solution {
 
-    String[] phonetic = new String[] {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+    String[] phonetic = new String[] {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
 
-    String[] phoneticTy = new String[] {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    String[] phoneticTy = new String[] {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
 
-    String[] phoneticTeen = new String[] {"Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    String[] phoneticTeen = new String[] {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
 
     String[] phoneticSegment = new String[] {"", "Thousand", "Million", "Billion"};
 
     public String numberToWords(int num) {
-        return read(num, 0);
-    }
-
-    String read(int num, int segment) { // assume num is less than 1000
+        List<String> result = read(num, 0);
         StringBuilder sb = new StringBuilder();
-        if (num >= 1000) {
-            sb.append(read(num / 1000, segment + 1));
-        }
-        int a = num / 100;
-        if (a != 0) {
-            sb.append(phonetic[a]).append("Hundred");
-        }
-        int b = num % 100;
-        if (b > 10 && b < 20) {
-            sb.append(phoneticTeen[b - 11]);
-        } else {
-            sb.append(phoneticTy[b / 10]).append(phonetic[b % 10]);
-        }
-        if (sb.length() > 0) {
-            sb.append(phoneticSegment[segment]);
+        for (int i = 0; i < result.size(); ++ i) {
+            if (i > 0) {
+                sb.append(" ");
+            }
+            sb.append(result.get(i));
         }
         return sb.toString();
+    }
+
+    List<String> read(int num, int segment) { // assume num is less than 1000
+        List<String> result = new ArrayList<String>();
+        List<String> higher = null;
+        if (num >= 1000) {
+            higher = read(num / 1000, segment + 1);
+        }
+        if (segment == 0 && num == 0) {
+            result.add(phonetic[0]);
+            return result;
+        }
+        int a = (num % 1000) / 100;
+        if (a != 0) {
+            result.add(phonetic[a]);
+            result.add("Hundred");
+        }
+        int b = num % 100;
+        if (b >= 10 && b < 20) {
+            result.add(phoneticTeen[b - 10]);
+        } else if (b >= 20) {
+            result.add(phoneticTy[b / 10]);
+            if (b % 10 != 0) {
+                result.add(phonetic[b % 10]);
+            }
+        } else if (b != 0) { // b < 10
+            result.add(phonetic[b]);
+        }
+        if (segment > 0 && result.size() > 0) {
+            result.add(phoneticSegment[segment]);
+        }
+        if (higher != null) {
+            higher.addAll(result);
+            result = higher;
+        }
+        return result;
     }
 }

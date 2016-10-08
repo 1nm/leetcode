@@ -1,25 +1,58 @@
 public class Solution {
-    private static final String patternRegex = "(?<num>\\d+)|(?<op>[+-*/])";
+    // private static final String patternRegex = "(?<num>\\d+)|(?<op>[+-\\\\*/])";
 
     public int calculate(String s) {
-        Stack<Character> operands = new Stack<Character>();
-        Stack<Integer> operators = new Stack<Integer>();
-        Pattern patterns = Pattern.compile(patternRegex);
-        Matcher matcher = patterns.matcher(s);
-        while (matcher.find()) {
-            System.out.println(matcher.group());
+        Stack<Character> ops = new Stack<Character>();
+        Stack<Integer> nums = new Stack<Integer>();
+        StringBuffer buffer = new StringBuffer();
+        int i = 0;
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            switch(c) {
+            case ' ': break;
+            case '+':
+            case '-': {
+                while (!ops.isEmpty()) {
+                    calc(ops, nums);
+                }
+                ops.push(c);
+                break;
+            }
+            case '*':
+            case '/': {
+                while (!ops.isEmpty() && (ops.peek() == '*' || ops.peek() == '/')) {
+                    calc(ops, nums);
+                }
+                ops.push(c);
+                break;
+            }
+            default: {
+                while (i < s.length() && s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                    buffer.append(s.charAt(i++));
+                }
+                int num = Integer.parseInt(buffer.toString());
+                nums.push(num);
+                buffer.setLength(0);
+                continue;
+            }
+            }
+            i ++;
         }
+        while (!ops.isEmpty()) {
+            calc(ops, nums);
+        }
+        return nums.peek();
     }
 
-    private String nextToken() {
-        if (matcher.find()) {
-            return matcher.group();
-        } else {
-            return null;
+    private void calc(Stack<Character> ops, Stack<Integer> nums) {
+        int num2 = nums.pop();
+        int num1 = nums.pop();
+        char op = ops.pop();
+        switch (op) {
+        case '+': nums.push(num1 + num2); break;
+        case '-': nums.push(num1 - num2); break;
+        case '*': nums.push(num1 * num2); break;
+        case '/': nums.push(num1 / num2); break;
         }
-    }
-
-    public static void main(String[] args) {
-        new Solution().calculate(" 34 - 2*4");
     }
 }

@@ -4,7 +4,8 @@ public class LRUCache {
     Queue<Node> queue;
     Map<Integer, Node> map;
 
-    class Node {
+    static class Node {
+        static long counter = 0L;
         int key, value;
         long timestamp;
         public Node(int key, int value) {
@@ -13,7 +14,7 @@ public class LRUCache {
             update();
         }
         public void update() {
-            this.timestamp = System.nanoTime(); // WA if currentTimeMillis() is used
+            this.timestamp = counter++;
         }
     }
 
@@ -32,7 +33,7 @@ public class LRUCache {
             Node node = map.get(key);
             queue.remove(node);
             node.update();
-            queue.add(node);
+            queue.offer(node);
             return node.value;
         }
         else
@@ -45,14 +46,14 @@ public class LRUCache {
             queue.remove(node);
             node.value = value;
             node.update();
-            queue.add(node);
+            queue.offer(node);
         } else {
             Node node = new Node(key, value);
             if (queue.size() >= capacity) {
                 Node eldest = queue.poll();
                 map.remove(eldest.key);
             }
-            queue.add(node);
+            queue.offer(node);
             map.put(key, node);
         }
     }

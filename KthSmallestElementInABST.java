@@ -13,12 +13,11 @@ public class Solution {
         Stack<TreeNode> stack = new Stack<TreeNode>();
         TreeNode node = root;
         int count = 0;
-        // visit left sub tree
-        while (node != null) {
-            stack.add(node);
-            node = node.left;
-        }
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
             // visit node
             node = stack.pop();
             count ++;
@@ -27,10 +26,6 @@ public class Solution {
             }
             // visit right sub tree
             node = node.right;
-            while (node != null) {
-                stack.add(node);
-                node = node.left;
-            }
         }
         return -1;
     }

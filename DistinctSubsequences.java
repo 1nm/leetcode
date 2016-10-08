@@ -1,4 +1,4 @@
-public class DistinctSubsequences {
+public class Solution {
     public int numDistinct(String s, String t) {
         int tlen = t.length(), slen = s.length();
         if (tlen == 0) return 1;
@@ -20,5 +20,4 @@ public class DistinctSubsequences {
             }
         return dp[tlen][slen];
     }
-
 }

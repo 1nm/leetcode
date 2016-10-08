@@ -1,17 +1,22 @@
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
+        if (target < matrix[0][0]) {
+            return false;
+        }
         // search row
         int start = 0, end = matrix.length - 1;
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
-            if (matrix[mid][0] > target) {
-                end = mid - 1;
-            } else {
+            if (matrix[mid][0] == target) {
+                return true;
+            } else if (matrix[mid][0] < target) {
                 start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
 
-        int row = start;
+        int row = end;
         start = 0;
         end = matrix[row].length - 1;
 
@@ -20,10 +25,10 @@ public class Solution {
             int mid = start + (end - start) / 2;
             if (matrix[row][mid] == target) {
                 return true;
-            } else if (matrix[row][mid] > target) {
-                end = mid - 1;
-            } else {
+            } else if (matrix[row][mid] < target) {
                 start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
 

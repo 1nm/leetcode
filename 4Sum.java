@@ -9,7 +9,7 @@ public class Solution {
                 int k = j + 1, l = nums.length - 1;
                 while (k < l) {
                     if (twosum ==  nums[k] + nums[l]) {
-                        List<Integer> quad = Arrays.asList(nums[i], nums[j], nums[k], nums[l]);
+                        List<Integer> quaduplet = Arrays.asList(nums[i], nums[j], nums[k], nums[l]);
                         if (!set.contains(quaduplet)) {
                             set.add(quaduplet);
                             result.add(quaduplet);

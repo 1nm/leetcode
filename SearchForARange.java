@@ -1,13 +1,17 @@
 public class Solution {
     public int[] searchRange(int[] nums, int target) {
-        return new int[] {searchLowerBound(nums, target), searchUpperBound(nums, target)};
+        int lower = searchLowerBound(nums, target);
+        if (lower == -1) {
+            return new int[] {-1, -1};
+        }
+        int upper = searchUpperBound(nums, target);
+        return new int[] {lower, upper};
     }
 
     private int searchLowerBound(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
+        int start = 0, end = nums.length - 1;
         while (start < end) {
-            int mid = start + (end - start) / 2; // avoid overflow
+            int mid = start + ((end - start) >> 1);
             if (nums[mid] >= target) {
                 end = mid;
             } else {
@@ -18,16 +22,15 @@ public class Solution {
     }
 
     private int searchUpperBound(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
+        int start = 0, end = nums.length - 1;
         while (start < end) {
-            int mid = start + (end - start) / 2; // avoid overflow
+            int mid = start + ((end - start + 1) >> 1);
             if (nums[mid] <= target) {
-                start = mid + 1;
+                start = mid;
             } else {
-                end = mid;
+                end = mid - 1;
             }
         }
-        return nums[end] == target ? end : -1;
+        return nums[start] == target ? start : -1;
     }
 }

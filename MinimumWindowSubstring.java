@@ -2,7 +2,7 @@ public class Solution {
     public String minWindow(String s, String t) {
         if (s.length() == 0 || t.length() == 0 || s.length() < t.length()) return "";
 
-        int minLen = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE;
         String result = "";
 
         int[] countS = new int[256];

@@ -1,4 +1,4 @@
-public class MaxProductSubArray {
+public class Solution {
     public int maxProduct(int[] nums) {
         if (nums.length == 0) {
             return 0;
@@ -10,15 +10,10 @@ public class MaxProductSubArray {
         for (int i = 1; i < nums.length; ++ i) {
             dpmin[i] = Math.min(nums[i], Math.min(dpmax[i - 1] * nums[i], dpmin[i - 1] * nums[i]));
             dpmax[i] = Math.max(nums[i], Math.max(dpmax[i - 1] * nums[i], dpmin[i - 1] * nums[i]));
-            System.out.println(dpmin[i] + " " +  dpmax[i]);
             if (max < dpmax[i]) {
                 max = dpmax[i];
             }
         }
         return max;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new MaxProductSubArray().maxProduct(new int[]{-4,-3}));
     }
 }

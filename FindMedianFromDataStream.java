@@ -6,17 +6,17 @@ class MedianFinder {
     // Adds a number into the data structure.
     public void addNum(int num) {
         if (small.size() == 0 && large.size() == 0)
-            small.add(num);
+            small.add(-num);
         else {
             if (small.size() == large.size()) {
-                if (num <= small.peek())
+                if (num <= large.peek())
                     small.add(-num);
                 else {
                     small.add(-large.poll());
                     large.add(num);
                 }
             } else {
-                if (num <= small.peek()) {
+                if (num <= -small.peek()) {
                     large.add(-small.poll());
                     small.add(-num);
                 } else
@@ -30,8 +30,8 @@ class MedianFinder {
         if (small.size() == 0 && large.size() == 0)
             return 0;
         if (small.size() > large.size())
-            return small.peek();
-        return (small.peek() - large.peek()) / 2.0;
+            return -small.peek();
+        return (large.peek() - small.peek()) / 2.0;
     }
 };
 

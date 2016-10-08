@@ -1,10 +1,18 @@
 public class Solution {
     public void wiggleSort(int[] nums) {
         quicksort(nums, 0, nums.length - 1);
-        for (int i = 1; i < nums.length / 2; i += 2) {
-            int temp = nums[i];
-            nums[i] = nums[nums.length - i];
-            nums[nums.length - i] = temp;
+        int[] temp = new int[nums.length];
+        int small = (nums.length - 1) / 2;
+        int large = nums.length - 1;
+        for (int i = 0; i < nums.length; i ++) {
+            if (i % 2 == 0) {
+                temp[i] = nums[small--];
+            } else {
+                temp[i] = nums[large--];
+            }
+        }
+        for (int i = 0; i < nums.length; ++ i) {
+            nums[i] = temp[i];
         }
     }
 
@@ -21,7 +29,7 @@ public class Solution {
 
     int partition(int[] nums, int low, int high) {
         int pivot = nums[high], pos = low;
-        for (int i = low, i < high; ++ i) {
+        for (int i = low; i < high; ++ i) {
             if (nums[i] <= pivot) {
                 int temp = nums[i];
                 nums[i] = nums[pos];

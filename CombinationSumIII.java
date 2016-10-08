@@ -2,6 +2,7 @@ public class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         process(result, new LinkedList<Integer>(), k, n, 1);
+        return result;
     }
 
     private void process(List<List<Integer>> result, LinkedList<Integer> current, int k, int target, int i) {

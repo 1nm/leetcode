@@ -5,17 +5,14 @@ public class Solution {
         }
         char[] sarray = s.toCharArray();
         char[] tarray = t.toCharArray();
-        boolean[] replaced = new boolean[sarray.length];
+        Map<Character, Character> map = new HashMap<Character, Character>();
         for (int i = 0; i < sarray.length; i++) {
-            if (!replaced[i] && sarray[i] != tarray[i]) {
-                // replace all the characters
-                for (int j = i; j < sarray.length; j++) {
-                    if (sarray[j] == sarray[i]) {
-                        sarray[j] = tarray[i];
-                        replaced[j] = true;
-                    }
+            if (!map.containsKey(sarray[i])) {
+                if (map.containsValue(tarray[i])) {
+                    return false;
                 }
-            } else if (replaced[i] && sarray[i] != tarray[i]) {
+                map.put(sarray[i], tarray[i]);
+            } else if (map.get(sarray[i]) != tarray[i]) {
                 return false;
             }
         }

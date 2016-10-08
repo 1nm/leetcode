@@ -1,10 +1,15 @@
 public class Solution {
-    Set<Integer> happy = new HashSet<Integer>();
-    Set<Integer> unhappy = new HashSet<Integer>();
-    Set<Integer> unknown = new HashSet<Integer>();
     
     public boolean isHappy(int n) {
-        
+        Set<Integer> set = new HashSet<Integer>();
+        while (!set.contains(n)) {
+            set.add(n);
+            n = getNext(n);
+            if (n == 1) {
+                return true;
+            }
+        }
+        return false;
     }
     
     private int getNext(int n) {
