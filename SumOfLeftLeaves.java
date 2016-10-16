@@ -4,12 +4,8 @@ public class Solution {
     }
 
     private int sum(TreeNode node, boolean isLeft) {
-        if (node.left == null && node.right == null) {
-            if (isLeft) return 1; else return 0;
-        }
-        int s = 0;
-        if (node.left != null) s += sum(node.left, true);
-        if (node.right != null) s += sum(node.right, false);
-        return s;
+        if (node == null) return 0;
+        if (node.left == null && node.right == null && isLeft) return node.val;
+        return sum(node.left, true) + sum(node.right, false);
     }
 }
