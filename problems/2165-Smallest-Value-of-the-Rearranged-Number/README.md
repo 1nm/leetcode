@@ -1,0 +1,3 @@
+# 2165. Smallest Value of the Rearranged Number
+- Difficulty: Medium
+- Acceptance: 50.5% (as of 2022-03-14)
