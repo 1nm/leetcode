@@ -1,7 +1,6 @@
-from slugify import slugify
 import os
-from datetime import datetime
 
+from slugify import slugify
 
 with open('problems.txt', 'r') as f:
   while True:
@@ -14,9 +13,5 @@ with open('problems.txt', 'r') as f:
     accept_rate = f.readline().rstrip()
     difficulty = f.readline().rstrip()
     slug = slugify(f'{number}-{title}', lowercase=False)
-    os.makedirs(f'problems/{slug}', exist_ok=True)
-    with open(f'problems/{slug}/README.md', 'w') as fout:
-      fout.write(f'# {number}. {title}\n')
-      fout.write(f'- Difficulty: {difficulty}\n')
-      fout.write(f'- Acceptance: {accept_rate} (as of {datetime.today().strftime("%Y-%m-%d")})\n')
-    # print(f'{number},{title},{accept_rate},{difficulty}')
+    os.makedirs(f'problems/{slug}/java', exist_ok=True)
+    os.makedirs(f'problems/{slug}/python', exist_ok=True)
