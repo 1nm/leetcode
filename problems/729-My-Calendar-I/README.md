@@ -2,7 +2,7 @@
 - Difficulty: Medium
 - Acceptance: 55.0% (as of 2022-03-14)
 
-## Ideas
+## Solutions
 
 1. Keep a sorted list of intervals
    * find floor and ceiling of the interval in list

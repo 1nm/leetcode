@@ -2,7 +2,7 @@
 - Difficulty: Hard
 - Acceptance: 49.1% (as of 2022-03-14)
 
-## Ideas
+## Solutions
 
 1. Backtracking, O(n!)
    * Trickest part is how to deduplicate from the backtracking results

@@ -2,7 +2,7 @@
 - Difficulty: Medium
 - Acceptance: 58.4% (as of 2022-03-14)
 
-## Ideas
+## Solutions
 
 Read the problem description carefully, result array is the 1-based index.
 

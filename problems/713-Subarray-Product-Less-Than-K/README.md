@@ -2,7 +2,7 @@
 - Difficulty: Medium
 - Acceptance: 43.3% (as of 2022-03-14)
 
-## Ideas
+## Solutions
 
 1. Sliding window
   * find all sliding windows of [i, j] that product[i, j] is less than k

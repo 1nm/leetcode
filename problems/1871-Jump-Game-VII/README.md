@@ -2,7 +2,7 @@
 - Difficulty: Medium
 - Acceptance: 24.7% (as of 2022-03-14)
 
-Ideas:
+Solutions:
 1. Brute force, O(n ^ 2), TLE
    - for each position i, update dp[i + minJump, i + maxJump]
    - time complexity is O(n^2) because maxJump - minJump can be as large as n
